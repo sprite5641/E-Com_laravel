@@ -43,16 +43,18 @@
                 <small>{{ $productDetails['brand']['name'] }}</small>
                 <hr class="soft" />
                 <small>จำนวนสินค้า {{$total_stock}}</small>
-                <form class="form-horizontal qtyFrm">
+            <form action="{{ url('add-to-cart')}}" method="post" class="form-horizontal qtyFrm">
+                @csrf
+            <input type="hidden" name="product_id" value="{{ $productDetails['id'] }}">
                     <div class="control-group">
                         <h4 class="getAttrPrice">ราคา <small style="color: red;">โปรดเลือกขนาด</small></h4>
-                    <select name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="span2 pull-left">
+                    <select name="size" id="getPrice" product-id="{{$productDetails['id']}}" class="span2 pull-left" required="">
                             <option disabled selected value>เลือกไซต์</option>
                             @foreach ($productDetails['attributes'] as $attribute)
                         <option value="{{ $attribute['size']}}">{{ $attribute['size']}}</option>
                             @endforeach
                         </select>
-                        <input type="number" class="span1" placeholder="จำนวน" />
+                        <input name="quantity" type="number" class="span1" placeholder="จำนวน" required="" />
                         <button type="submit" class="btn btn-large btn-primary pull-right"> เพิ่มไปยังตะกร้า <i
                                 class=" icon-shopping-cart"></i></button>
                     </div>

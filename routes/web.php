@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+ Route::get('/welcome', function () {
+     return view('welcome');
+ });
 use App\Category;
 
 Auth::routes();

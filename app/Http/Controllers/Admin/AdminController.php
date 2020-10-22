@@ -38,20 +38,20 @@ class AdminController extends Controller
                 'email.email' => 'กรอกอีเมลล์ผิด',
                 'password.required' => 'กรุณากรอกรหัสสผ่าน',
             ];
-
             $this->validate($request, $rules, $customMessages);
-            if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
-                return redirect('admin/dashboard');
-            } else {
-                Session::flash('error_message', 'อีเมลล์หรือรหัสผ่านผิด');
-                return redirect()->back();
-            }
+
+             if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
+                 return redirect('admin/dashboard');
+             } else {
+                 Session::flash('error_message', 'อีเมลล์หรือรหัสผ่านผิด');
+                 return redirect()->back();
+             }
         }
         return view('admin.admin_login');
     }
     public function logout()
     {
-        Auth::guard('admin')->logout();
+        Auth::logout();
         return redirect('/admin');
     }
     public function chkCurrentPassword(Request $request)

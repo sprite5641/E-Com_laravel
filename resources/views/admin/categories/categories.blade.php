@@ -71,17 +71,17 @@
                                                     @if ($category->status == 1)
                                                         <a class="updateCategoryStatus" id="category-{{ $category->id }}"
                                                             category_id="{{ $category->id }}"
-                                                            href="javascript:void(0)"><i class="fa fa-toggle-on" aria-hidden="true" status="Active"></i></a>
+                                                            href="javascript:void(0)"><i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i></a>
                                                     @else
                                                         <a class="updateCategoryStatus" id="category-{{ $category->id }}"
                                                             category_id="{{ $category->id }}"
-                                                            href="javascript:void(0)"><i class="fa fa-toggle-off" aria-hidden="true" status="Inactive"></i></a>
+                                                            href="javascript:void(0)"><i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i></a>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ url('admin/add-edit-category/'.$category->id) }}"><i class="fas fa-edit"></i></a>
+                                                    <a class="btn btn-info btn-sm" href="{{ url('admin/add-edit-category/'.$category->id) }}"><i class="fas fa-edit"></i> แก้ไข</a>
                                                     &nbsp;&nbsp;
-                                                    <a href="javascript:void(0)" class="confirmDelete" record="category" recordid="{{ $category->id }}"><i class="fas fa-trash-alt"></i></a> 
+                                                    <a href="javascript:void(0)" class="confirmDelete btn btn-danger btn-sm" record="category" recordid="{{ $category->id }}"><i class="fas fa-trash-alt"></i> ลบ</a> 
                                                 </td>
                                             </tr>
                                         @endforeach

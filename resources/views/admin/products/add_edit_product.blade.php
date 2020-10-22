@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard')}}">หน้าหลัก</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard') }}">หน้าหลัก</a></li>
                             <li class="breadcrumb-item active">Products</li>
                         </ol>
                     </div>
@@ -48,7 +48,6 @@
                     <div class="card card-default">
                         <div class="card-header">
                             <h3 class="card-title">{{ $title }}</h3>
-
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                         class="fas fa-minus"></i></button>
@@ -60,6 +59,29 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="col-md-2">
+                                        <div class="form-group text-center">
+                                            <label for="main_image">รูปภาพสินค้า</label>
+                                            @if (!empty($productdata['main_image']))
+                                                <img style="width:75%;"
+                                                    src="{{  asset('images/product_images/small/' . $productdata['main_image']) }}"
+                                                    id="output" class="img-fluid rounded ">
+                                                <span title="Delete Product Image" href="javascript:void(0)"
+                                                    class="confirmDelete btn btn-danger mt-2 "
+                                                    record="product-image"
+                                                    recordid="{{ $productdata['id'] }}">ลบรูป</span>
+                                            @else
+                                                <img style="width:75%;" src="{{ asset('images/product_images/small/no-image.png') }}"
+                                                    id="output" class="img-fluid rounded ">
+                                            @endif
+                                            <span class="btn btn-primary btn-file mt-2">
+                                                เลือกไฟล์ <input type="file" name="main_image" id="main_image"
+                                                    onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>ประเภท</label>
@@ -95,8 +117,9 @@
                                             <option value="">เลือก</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand['id'] }}" @if (!empty(@old('brand_id')) && $brand['id'] == @old('brand_id'))
-                                                selected=""
-                                                @elseif(!empty($productdata['brand_id']) && $productdata['brand_id'] == $brand['id'])
+                                                    selected=""
+                                                @elseif(!empty($productdata['brand_id']) && $productdata['brand_id'] ==
+                                                    $brand['id'])
                                                     selected=""
                                             @endif>{{ $brand['name'] }}</option>
                                             @endforeach
@@ -108,14 +131,14 @@
                                         <label for="product_name">ชื่อสินค้า</label>
                                         <input type="text" class="form-control" name="product_name" id="product_name"
                                             placeholder="ป้อนชื่อสินค้า" @if (!empty($productdata['product_name']))
-                                      value="{{ $productdata['product_name'] }}" @else
+                                    value="{{ $productdata['product_name'] }}" @else
                                         value="{{ old('product_name') }}" @endif>
                                     </div>
                                     <div class="form-group">
                                         <label for="product_code">โค้ดสินค้า</label>
                                         <input type="text" class="form-control" name="product_code" id="product_code"
                                             placeholder="ป้อนโค้ดสินค้า" @if (!empty($productdata['product_code']))
-                                      value="{{ $productdata['product_code'] }}" @else
+                                    value="{{ $productdata['product_code'] }}" @else
                                         value="{{ old('product_code') }}" @endif>
                                     </div>
                                 </div>
@@ -124,14 +147,14 @@
                                         <label for="product_color">สีสินค้า</label>
                                         <input type="text" class="form-control" name="product_color" id="product_color"
                                             placeholder="ป้อนสีสินค้า" @if (!empty($productdata['product_color']))
-                                      value="{{ $productdata['product_color'] }}" @else
+                                    value="{{ $productdata['product_color'] }}" @else
                                         value="{{ old('product_color') }}" @endif>
                                     </div>
                                     <div class="form-group">
                                         <label for="product_price">ราคาสินค้า</label>
                                         <input type="text" class="form-control" name="product_price" id="product_price"
                                             placeholder="ป้อนราคาสินค้า" @if (!empty($productdata['product_price']))
-                                      value="{{ $productdata['product_price'] }}" @else
+                                    value="{{ $productdata['product_price'] }}" @else
                                         value="{{ old('product_price') }}" @endif>
                                     </div>
                                 </div>
@@ -140,59 +163,21 @@
                                         <label for="product_weight">น้ำหนักสินค้า</label>
                                         <input type="text" class="form-control" name="product_weight" id="product_weight"
                                             placeholder="ป้อนน้ำหนักสินค้า" @if (!empty($productdata['product_weight']))
-                                      value="{{ $productdata['product_weight'] }}" @else
+                                    value="{{ $productdata['product_weight'] }}" @else
                                         value="{{ old('product_weight') }}" @endif>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="main_image">รูปภาพสินค้า</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="main_image"
-                                                    id="main_image">
-                                                <label class="custom-file-label" for="main_image">เลือกไฟล์</label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">อัพโหลด</span>
-                                            </div>
-                                        </div>(แนะนำเลือกรูปภาพขนาด:&nbsp;&nbsp;กว้าง:&nbsp;1040&nbsp;พิกเซล,&nbsp;&nbsp;สูง:&nbsp;1200&nbsp;พิกเซล)
-                                        @if (!empty($productdata['main_image']))
-                                            <div><img style="width:50px; margin-top:5px;"
-                                                    src="{{ asset('images/product_images/small/' . $productdata['main_image']) }}">
-                                                &nbsp;
-                                                <a class="confirmDelete" href="javascript:void(0)" record="product-image"
-                                                    recordid="{{ $productdata['id'] }}">ลบรูปภาพ</a>
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="product_discount">จำนวนสินค้า</label>
                                         <input type="text" class="form-control" name="product_discount"
                                             id="product_discount" placeholder="ป้อนจำนวนสินค้า" @if (!empty($productdata['product_discount']))
-                                       value="{{ $productdata['product_discount'] }}" @else
+                                    value="{{ $productdata['product_discount'] }}" @else
                                         value="{{ old('product_discount') }}" @endif>
                                     </div>
-                                  <div class="form-group">
-                                        <label>เลือกชนิดผ้าเสื้อ</label>
-                                        <select name="fabric" id="fabric" class="form-control select2" style="width: 100%;">
-                                            <option value="">เลือก</option>
-                                            @foreach ($fabricArray as $fabric)
-                                                <option value="{{ $fabric }}" @if (!empty($productdata['fabric']) && $productdata['fabric'] == $fabric)
-                                                    selected=""
-                                            @endif>{{ $fabric }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
                                 </div>
+                                
+                            </div>
+                            <div class="row">
                                 <div class="col-12 col-sm-6">
-                                    <div class="form-group">
-                                        <label for="description">รายละเอียดสินค้า</label>
-                                        <textarea name="description" id="description" class="form-control" rows="3"
-                                            placeholder="ป้อนรายละเอียดสินค้า">@if (!empty($productdata['description'])){{ $productdata['description'] }}@else{{ old('description') }}@endif</textarea>
-                                    </div>
                                     <div class="form-group">
                                         <label>เลือกแขนเสื้อ</label>
                                         <select name="sleeve" id="sleeve" class="form-control select2" style="width: 100%;">
@@ -204,7 +189,19 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label>เลือกชนิดผ้าเสื้อ</label>
+                                        <select name="fabric" id="fabric" class="form-control select2" style="width: 100%;">
+                                            <option value="">เลือก</option>
+                                            @foreach ($fabricArray as $fabric)
+                                                <option value="{{ $fabric }}" @if (!empty($productdata['fabric']) && $productdata['fabric'] == $fabric)
+                                                    selected=""
+                                            @endif>{{ $fabric }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
+
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label>เลือกรูปแบบเสื้อ</label>
@@ -244,12 +241,19 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="is_featured">รายการเด่น</label>
+                                        <label for="is_featured">สินค้าแนะนำ</label>
                                         <input type="checkbox" name="is_featured" id="is_featured" value="Yes" @if (!empty($productdata['is_featured']) && $productdata['is_featured'] == 'Yes')
                                         checked=""@endif>
                                     </div>
-                                   
-                                </div>    
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="description">รายละเอียดสินค้า</label>
+                                        <textarea name="description" id="description" class="form-control" rows="3"
+                                            placeholder="ป้อนรายละเอียดสินค้า">@if (!empty($productdata['description'])){{ $productdata['description'] }}@else{{ old('description') }}@endif</textarea>
+                                    </div>
+                                    
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">

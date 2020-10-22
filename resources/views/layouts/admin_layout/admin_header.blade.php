@@ -17,7 +17,7 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a title="Logout" href="javascript:void(0)" class="confirmLogout">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="fas fa-sign-out-alt text-danger"></i>
           ออกจากระบบ
         </a> 
         </a>

@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard')}}">หน้าหลัก</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard') }}">หน้าหลัก</a></li>
                             <li class="breadcrumb-item active">Products Attributes</li>
                         </ol>
                     </div>
@@ -80,8 +80,17 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <img style="width:100px;"
-                                            src="{{ asset('images/product_images/small/' . $productdata['main_image']) }}">
+                                        <div class="form-group">
+                                            <?php $product_image_path = 'images/product_images/small/' .
+                                            $productdata['main_image']; ?>
+                                            @if (!empty($productdata['main_image']) && file_exists($product_image_path))
+                                                <img style="width: 100px;"
+                                                    src="{{ asset('images/product_images/small/' . $productdata['main_image']) }}">
+                                            @else
+                                                <img style="width: 100px;"
+                                                    src="{{ asset('images/product_images/small/no-image.png') }}">
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="field_wrapper">
@@ -94,7 +103,9 @@
                                             placeholder="ราคา" required="" />
                                         <input style="width: 100px" id="stock" name="stock[]" type="number" value=""
                                             placeholder="จำนวน" required="" />
-                                        <a href="javascript:void(0);" class="add_button" title="Add field">เพิ่ม</a>
+                                        <a href="javascript:void(0);" class="add_button btn btn-info btn-sm"
+                                            title="Add field">เพิ่ม</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -142,19 +153,25 @@
                                                     required="">
                                             </td>
                                             <td class="text-center">
-                                                @if ($attribute['status']== 1)
-                                                <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}"
-                                                    attribute_id="{{ $attribute['id'] }}"
-                                                    href="javascript:void(0)"><i class="fa fa-toggle-on" aria-hidden="true" status="Active"></i></a>
-                                            @else
-                                                <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}"
-                                                    attribute_id="{{ $attribute['id'] }}"
-                                                    href="javascript:void(0)"><i class="fa fa-toggle-off" aria-hidden="true" status="Inactive"></i></a>
-                                            @endif
+
+                                                @if ($attribute['status'] == 1)
+                                                    <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}"
+                                                        attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)"><i
+                                                            class="fa fa-toggle-on text-success" aria-hidden="true"
+                                                            status="Active"></i></a>
+                                                @else
+                                                    <a class="updateAttributeStatus" id="attribute-{{ $attribute['id'] }}"
+                                                        attribute_id="{{ $attribute['id'] }}" href="javascript:void(0)"><i
+                                                            class="fa fa-toggle-off text-danger" aria-hidden="true"
+                                                            status="Inactive"></i></a>
+
+                                                @endif
                                             </td>
                                             <td class="text-center">
-                                                <a title="Delete Attribute" href="javascript:void(0)" class="confirmDelete" record="attribute"
-                                            recordid="{{ $attribute['id'] }}"><i class="fas fa-trash-alt"></i></a>
+                                                <a title="Delete Attribute" href="javascript:void(0)"
+                                                    class="confirmDelete btn btn-danger btn-sm" record="attribute"
+                                                    recordid="{{ $attribute['id'] }}"><i class="fas fa-trash-alt"></i>
+                                                    ลบ</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -163,7 +180,7 @@
                         </div>
                         <!-- /.card-body -->
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">อัพเดตรายละเอียด</button> 
+                            <button type="submit" class="btn btn-primary">อัพเดตรายละเอียด</button>
                         </div>
                     </div>
                 </form>

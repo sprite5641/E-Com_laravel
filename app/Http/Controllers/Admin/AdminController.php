@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Session;
 use \App\Admin;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
-
+use Illuminate\Support\Facades\File;
 class AdminController extends Controller
 {
     public function dashboard()
@@ -127,5 +127,22 @@ class AdminController extends Controller
             return redirect()->back();
         }
         return view('admin.update_admin_details');
+    }
+
+    public function deleteAdminImage($id)
+    {
+        $adminImage = Admin::select('image')->where('id', Auth::guard('admin')->user()->id)->first();
+        $admin_image_path = 'images/admin_images/admin_photos/';
+
+        if (File::exists($admin_image_path . $adminImage->image)) {
+            File::delete($admin_image_path . $adminImage->image);
+        }
+
+        Admin::where('id',$id) ->update(['image' => '']);
+        
+        $message = 'ลบภาพสินค้าเรียบร้อย!';
+        session::flash('success_message', $message);
+
+        return redirect()->back();
     }
 }

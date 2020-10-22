@@ -25,7 +25,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-6">
+                    <div class="col-md-12 ">
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
@@ -55,7 +55,7 @@
                             <form role="form" method="post" action="{{ url('/admin/update-current-pwd') }}"
                                 name="updatePasswordForm" id="updatePasswordForm">
                                 @csrf
-                                <div class="card-body">
+                                <div class="card-body ">
                                     <?php
                                     /*
                                     <div class="form-group">
@@ -64,30 +64,35 @@
                                             placeholder="ป้อนชื่อแอดมิน" name="admin_name" id="admin_name">
                                     </div>*/
                                     ?>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">อีเมลล์</label>
-                                        <input class="form-control" value="{{ $adminDetails->email }}" readonly="">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">อีเมลล์</label>
+                                                <input class="form-control" value="{{ $adminDetails->email }}" readonly="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">สถานะ</label>
+                                                <input class="form-control" value="{{ $adminDetails->type }}" readonly="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">รหัสผ่านเดิม</label>
+                                                <input type="password" class="form-control" placeholder="ป้อนรหัสผ่านเดิม"
+                                                    name="current_pwd" id="current_pwd" required="">
+                                                <span id="chkCurrentPwd"></span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">รหัสผ่านใหม่</label>
+                                                <input type="password" class="form-control" placeholder="ป้อนรหัสผ่านใหม่"
+                                                    name="new_pwd" id="new_pwd" required="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">ยืนยันรหัสผ่านใหม่</label>
+                                                <input type="password" class="form-control" placeholder="ป้อนยืนยันรหัสผ่านใหม่"
+                                                    name="confirm_pwd" id="confirm_pwd" required="">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">สถานะ</label>
-                                        <input class="form-control" value="{{ $adminDetails->type }}" readonly="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">รหัสผ่านเดิม</label>
-                                        <input type="password" class="form-control" placeholder="ป้อนรหัสผ่านเดิม"
-                                            name="current_pwd" id="current_pwd" required="">
-                                        <span id="chkCurrentPwd"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">รหัสผ่านใหม่</label>
-                                        <input type="password" class="form-control" placeholder="ป้อนรหัสผ่านใหม่"
-                                            name="new_pwd" id="new_pwd" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">ยืนยันรหัสผ่านใหม่</label>
-                                        <input type="password" class="form-control" placeholder="ป้อนยืนยันรหัสผ่านใหม่"
-                                            name="confirm_pwd" id="confirm_pwd" required="">
-                                    </div>
+                                    
                                 </div>
                                 <!-- /.card-body -->
 

@@ -80,8 +80,17 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <img style="width:100px;"
-                                            src="{{ asset('images/product_images/small/' . $productdata['main_image']) }}">
+                                        <div class="form-group">
+                                            <?php $product_image_path = 'images/product_images/small/' .
+                                            $productdata['main_image']; ?>
+                                            @if (!empty($productdata['main_image']) && file_exists($product_image_path))
+                                                <img style="width: 100px;"
+                                                    src="{{ asset('images/product_images/small/' . $productdata['main_image']) }}">
+                                            @else
+                                                <img style="width: 100px;"
+                                                    src="{{ asset('images/product_images/small/no-image.png') }}">
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="field_wrapper">
@@ -129,16 +138,16 @@
                                                 @if ($image['status']== 1)
                                                 <a class="updateImageStatus" id="image-{{ $image['id'] }}"
                                                     image_id="{{ $image['id'] }}"
-                                                    href="javascript:void(0)"><i class="fa fa-toggle-on" aria-hidden="true" status="Active"></i></a>
+                                                    href="javascript:void(0)"><i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i></a>
                                             @else
                                                 <a class="updateImageStatus" id="image-{{ $image['id'] }}"
                                                     image_id="{{ $image['id'] }}"
-                                                    href="javascript:void(0)"><i class="fa fa-toggle-off" aria-hidden="true" status="Inactive"></i></a>
+                                                    href="javascript:void(0)"><i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i></a>
                                             @endif
                                             </td>
                                             <td class="text-center">
-                                                <a title="Delete Image" href="javascript:void(0)" class="confirmDelete" record="image"
-                                            recordid="{{ $image['id'] }}"><i class="fas fa-trash-alt"></i></a>
+                                                <a title="Delete Image" href="javascript:void(0)" class="confirmDelete btn btn-danger btn-sm" record="image"
+                                            recordid="{{ $image['id'] }}"><i class="fas fa-trash-alt"></i> ลบ</a>
                                             </td>
                                         </tr>
                                     @endforeach

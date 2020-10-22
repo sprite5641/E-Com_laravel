@@ -32,6 +32,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         Route::get('logout', 'AdminController@logout');
         Route::post('check-current-pwd', 'AdminController@chkCurrentPassword');
         Route::post('update-current-pwd', 'AdminController@updateCurrentPassword');
+        Route::get('delete-admin-image/{id}', 'AdminController@deleteAdminImage');
         Route::match(['get', 'post'], 'update-admin-details', 'AdminController@updateAdminDetails');
 
         //sections
@@ -58,7 +59,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         Route::get('delete-product/{id}', 'ProductsController@deleteProduct');
         Route::match(['get', 'post'], 'add-edit-product/{id?}', 'ProductsController@addEditProduct');
         Route::get('delete-product-image/{id}', 'ProductsController@deteleProductImage');
-        Route::get('delete-product-video/{id}', 'ProductsController@deteleProductVideo');
+        // Route::get('delete-product-video/{id}', 'ProductsController@deteleProductVideo');
 
         //attribues
         Route::match(['get', 'post'], 'add-attributes/{id}', 'ProductsController@addAttributes');

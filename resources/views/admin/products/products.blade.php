@@ -64,7 +64,7 @@
                                                 <td>{{ $product->product_name }}</td>
                                                 <td>{{ $product->product_code }}</td>
                                                 <td>{{ $product->product_color }}</td>
-                                                <td>
+                                                <td class="text-center">
                                                     <?php $product_image_path = "images/product_images/small/".$product->main_image; ?>
                                                     @if (!empty($product->main_image) && file_exists($product_image_path))
                                                     <img style="width: 100px;"
@@ -80,22 +80,22 @@
                                                     @if ($product->status == 1)
                                                         <a class="updateProductStatus" id="product-{{ $product->id }}"
                                                             product_id="{{ $product->id }}"
-                                                            href="javascript:void(0)"><i class="fa fa-toggle-on" aria-hidden="true" status="Active"></i></a>
+                                                            href="javascript:void(0)"><i class="fa fa-toggle-on text-success" aria-hidden="true" status="Active"></i></a>
                                                     @else
                                                         <a class="updateProductStatus" id="product-{{ $product->id }}"
                                                             product_id="{{ $product->id }}"
-                                                            href="javascript:void(0)"><i class="fa fa-toggle-off" aria-hidden="true" status="Inactive"></i></a>
+                                                            href="javascript:void(0)"><i class="fa fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i></a>
                                                     @endif
                                                 </td>
                                                 <td class="text-center">
-                                                    <a title="Add/Edit Attribues" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="fas fa-plus"></i></a>
+                                                    <a class="btn btn-secondary btn-sm" title="Add/Edit Attribues" href="{{ url('admin/add-attributes/'.$product->id) }}"><i class="fas fa-plus"></i> เพิ่ม/แก้ไขไซส์</a>
                                                     &nbsp;&nbsp;
-                                                    <a title="Add/Edit Images" href="{{ url('admin/add-images/'.$product->id) }}"><i class="fas fa-plus-circle"></i></a>
+                                                    <a class="btn btn-primary btn-sm" title="Add/Edit Images" href="{{ url('admin/add-images/'.$product->id) }}"><i class="fas fa-plus-circle"></i> เพิ่ม/แก้ไขรูป</a>
                                                     &nbsp;&nbsp;
-                                                    <a title="Edit Product" href="{{ url('admin/add-edit-product/'.$product->id) }}"><i class="fas fa-edit"></i></a>
+                                                    <a class="btn btn-info btn-sm" title="Edit Product" href="{{ url('admin/add-edit-product/'.$product->id) }}"><i class="fas fa-edit"></i> แก้ไข</a>
                                                     &nbsp;&nbsp;
-                                                    <a title="Delete Product" href="javascript:void(0)" class="confirmDelete" record="product"
-                                                        recordid="{{ $product->id }}"><i class="fas fa-trash-alt"></i></a> 
+                                                    <a title="Delete Product" href="javascript:void(0)" class="confirmDelete btn btn-danger btn-sm" record="product"
+                                                        recordid="{{ $product->id }}"><i class="fas fa-trash-alt"></i> ลบ</a> 
                                                 </td>
                                             </tr>
                                         @endforeach

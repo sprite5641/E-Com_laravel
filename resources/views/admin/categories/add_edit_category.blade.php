@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard')}}">หน้าหลัก</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/admin/dashboard') }}">หน้าหลัก</a></li>
                             <li class="breadcrumb-item active">Categories</li>
                         </ol>
                     </div>
@@ -59,6 +59,29 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="col-md-2">
+                                        <div class="form-group text-center">
+                                            <label for="category_image">รูปภาพประเภทสินค้า</label>
+                                            @if (!empty($categorydata['category_image']))
+                                                <img style="width:75%;"
+                                                    src="{{ asset('images/category_images/' . $categorydata['category_image']) }}"
+                                                    id="output" class="img-fluid rounded ">
+                                                <span title="Delete Category Image" href="javascript:void(0)"
+                                                    class="confirmDelete btn btn-danger mt-2 " record="category-image"
+                                                    recordid="{{ $categorydata['id'] }}">ลบรูป</span>
+                                            @else
+                                                <img style="width:75%;"
+                                                    src="{{ asset('images/product_images/small/no-image.png') }}"
+                                                    id="output" class="img-fluid rounded ">
+                                            @endif
+                                            <span class="btn btn-primary btn-file mt-2">
+                                                เลือกไฟล์ <input type="file" name="category_image" id="category_image"
+                                                    onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="category_name">ชื่อประเภท</label>
@@ -70,8 +93,14 @@
                                     <div id="appendCategoriesLevel">
                                         @include('admin.categories.append_categories_level')
                                     </div>
+                                    <div class="form-group">
+                                        <label for="url">url</label>
+                                        <input type="text" class="form-control" name="url" id="url" placeholder="ป้อนURL"
+                                            @if (!empty($categorydata['url']))
+                                    value="{{ $categorydata['url'] }}" @else
+                                        value="{{ old('url') }}" @endif>
+                                    </div>
                                 </div>
-
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>เพศสินค้า</label>
@@ -83,66 +112,27 @@
                                                     selected=""
                                             @endif >{{ $section->name }}</option>
                                             @endforeach
-
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="category_image">รูปสินค้า</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="category_image"
-                                                    id="category_image">
-                                                <label class="custom-file-label" for="category_image">เลือกไฟล์</label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">อัพโหลด</span>
-                                            </div>
-
-                                        </div>
-                                        @if (!empty($categorydata['category_image']))
-                                            <div><img style="width:50px; margin-top:5px;"
-                                                    src="{{ asset('images/category_images/' . $categorydata['category_image']) }}">
-                                                &nbsp;
-                                                 <a class="confirmDelete" href="javascript:void(0)" record="category-image" recordid="{{$categorydata['id']}}" <?php{{-- href="{{ url('admin/delete-category-image/' . $categorydata['id']) }}"--}}
-                                                ?> > 
-                                                    ลบรูปภาพ</a>
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-12 col-sm-6">
-                                    <div class="form-group">
                                         <label for="category_discount">จำนวน</label>
                                         <input type="text" class="form-control" name="category_discount"
-                                            id="category_discount" placeholder="ป้อนจำนวน" @if (!empty($categorydata['category_discount'])) 
-                                            value="{{ $categorydata['category_discount'] }}" @else
+                                            id="category_discount" placeholder="ป้อนจำนวน" @if (!empty($categorydata['category_discount']))
+                                    value="{{ $categorydata['category_discount'] }}" @else
                                         value="{{ old('category_discount') }}" @endif>
                                     </div>
                                     <div class="form-group">
-                                        <label for="url">url</label>
-                                        <input type="text" class="form-control" name="url"
-                                            id="url" placeholder="ป้อนจำนวน" @if (!empty($categorydata['url'])) 
-                                            value="{{ $categorydata['url'] }}" @else
-                                        value="{{ old('url') }}" @endif>
+                                        <label for="description">รายละเอียด</label>
+                                        <textarea name="description" id="description" class="form-control" rows="3"
+                                            placeholder="ป้อนรายละเอียด">@if (!empty($categorydata['description'])){{ $categorydata['description'] }}@else{{ old('description') }}@endif</textarea>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-6">
-                                <div class="form-group">
-                                    <label for="description">รายละเอียด</label>
-                                    <textarea name="description" id="description" class="form-control" rows="3"
-                                        placeholder="ป้อนรายละเอียด">@if (!empty($categorydata['description'])){{ $categorydata['description'] }}@else{{ old('description') }}@endif</textarea>
-                                </div>
-                               
-                                </div>
                             </div>
-                        </div>
 
+                           
+                        </div>
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">ตกลง</button> 
+                            <button type="submit" class="btn btn-primary">ตกลง</button>
                         </div>
                     </div>
                 </form>

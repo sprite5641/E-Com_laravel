@@ -36,9 +36,9 @@ $(document).ready(function () {
         // alert(resp['status']);
         // alert(resp['section_id']);
         if (resp['status'] == 0) {
-          $("#section-" + section_id).html("<i class='fa fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+          $("#section-" + section_id).html("<i class='fa fa-toggle-off text-danger' aria-hidden='true' status='Inactive'></i>");
         } else if (resp['status'] == 1) {
-          $("#section-" + section_id).html("<i class='fa fa-toggle-on' aria-hidden='true' status='Active'></i>");
+          $("#section-" + section_id).html("<i class='fa fa-toggle-on text-success' aria-hidden='true' status='Active'></i>");
         }
       },
       error: function error() {
@@ -60,9 +60,9 @@ $(document).ready(function () {
         // alert(resp['status']);
         // alert(resp['category_id']);
         if (resp['status'] == 0) {
-          $("#category-" + category_id).html("<i class='fa fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+          $("#category-" + category_id).html("<i class='fa fa-toggle-off text-danger' aria-hidden='true' status='Inactive'></i>");
         } else if (resp['status'] == 1) {
-          $("#category-" + category_id).html("<i class='fa fa-toggle-on' aria-hidden='true' status='Active'></i>");
+          $("#category-" + category_id).html("<i class='fa fa-toggle-on text-success' aria-hidden='true' status='Active'></i>");
         }
       },
       error: function error() {
@@ -100,9 +100,9 @@ $(document).ready(function () {
         // alert(resp['status']);
         // alert(resp['product_id']);
         if (resp['status'] == 0) {
-          $("#product-" + product_id).html("<i class='fa fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+          $("#product-" + product_id).html("<i class='fa fa-toggle-off text-danger' aria-hidden='true' status='Inactive'></i>");
         } else if (resp['status'] == 1) {
-          $("#product-" + product_id).html("<i class='fa fa-toggle-on' aria-hidden='true' status='Active'></i>");
+          $("#product-" + product_id).html("<i class='fa fa-toggle-on text-success' aria-hidden='true' status='Active'></i>");
         }
       },
       error: function error() {
@@ -111,7 +111,7 @@ $(document).ready(function () {
     });
   });
   $(document).on("click", ".updateAttributeStatus", function () {
-    var status = $(this).text();
+    var status = $(this).children("i").attr("status");
     var attribute_id = $(this).attr("attribute_id");
     $.ajax({
       type: 'post',
@@ -124,9 +124,9 @@ $(document).ready(function () {
         // alert(resp['status']);
         // alert(resp['attribute_id']);
         if (resp['status'] == 0) {
-          $("#attribute-" + attribute_id).html("<i class='fa fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+          $("#attribute-" + attribute_id).html("<i class='fa fa-toggle-off text-danger' aria-hidden='true' status='Inactive'></i>");
         } else if (resp['status'] == 1) {
-          $("#attribute-" + attribute_id).html("<i class='fa fa-toggle-on' aria-hidden='true' status='Active'></i>");
+          $("#attribute-" + attribute_id).html("<i class='fa fa-toggle-on text-success' aria-hidden='true' status='Active'></i>");
         }
       },
       error: function error() {
@@ -148,9 +148,9 @@ $(document).ready(function () {
         // alert(resp['status']);
         // alert(resp['image_id']);
         if (resp['status'] == 0) {
-          $("#image-" + image_id).html("<i class='fa fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+          $("#image-" + image_id).html("<i class='fa fa-toggle-off text-danger' aria-hidden='true' status='Inactive'></i>");
         } else if (resp['status'] == 1) {
-          $("#image-" + image_id).html("<i class='fa fa-toggle-on' aria-hidden='true' status='Active'></i>");
+          $("#image-" + image_id).html("<i class='fa fa-toggle-on text-success' aria-hidden='true' status='Active'></i>");
         }
       },
       error: function error() {
@@ -172,9 +172,9 @@ $(document).ready(function () {
         // alert(resp['status']);
         // alert(resp['brand_id']);
         if (resp['status'] == 0) {
-          $("#brand-" + brand_id).html("<i class='fa fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+          $("#brand-" + brand_id).html("<i class='fa fa-toggle-off text-danger' aria-hidden='true' status='Inactive'></i>");
         } else if (resp['status'] == 1) {
-          $("#brand-" + brand_id).html("<i class='fa fa-toggle-on' aria-hidden='true' status='Active'></i>");
+          $("#brand-" + brand_id).html("<i class='fa fa-toggle-on text-success' aria-hidden='true' status='Active'></i>");
         }
       },
       error: function error() {
@@ -196,9 +196,9 @@ $(document).ready(function () {
         // alert(resp['status']);
         // alert(resp['banner_id']);
         if (resp['status'] == 0) {
-          $("#banner-" + banner_id).html("<i class='fa fa-toggle-off' aria-hidden='true' status='Inactive'></i>");
+          $("#banner-" + banner_id).html("<i class='fa fa-toggle-off text-danger' aria-hidden='true' status='Inactive'></i>");
         } else if (resp['status'] == 1) {
-          $("#banner-" + banner_id).html("<i class='fa fa-toggle-on' aria-hidden='true' status='Active'></i>");
+          $("#banner-" + banner_id).html("<i class='fa fa-toggle-on text-success' aria-hidden='true' status='Active'></i>");
         }
       },
       error: function error() {
@@ -221,6 +221,25 @@ $(document).ready(function () {
     }).then(function (result) {
       if (result.isConfirmed) {
         Swal.fire('ลบ!', 'คุณลบสินค้าเรียบร้อย.', 'success');
+        window.location.href = "/admin/delete-" + record + "/" + recordid;
+      }
+    });
+  });
+  $(document).on("click", ".confirmDeleteAdminImage", function () {
+    var record = $(this).attr("record");
+    var recordid = $(this).attr("recordid");
+    Swal.fire({
+      title: 'ลบภาพ?',
+      text: "คุณต้องการภาพแอดมินหรือไม่!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'ลบ!',
+      cancelButtonText: 'ยกเลิก'
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        Swal.fire('ลบ!', 'คุณลบภาพแอดมินเรียบร้อย.', 'success');
         window.location.href = "/admin/delete-" + record + "/" + recordid;
       }
     });
@@ -248,7 +267,7 @@ $(document).ready(function () {
 
   var wrapper = $('.field_wrapper'); //อินพุต
 
-  var fieldHTML = '<div style="margin-top:10px;"><input type="text" name="size[]" style="width:100px" value="" placeholder="ไซส์"/> <input type="text" name="sku[]" style="width:100px" value="" placeholder="โค้ดย่อย"/> <input type="text" name="price[]" style="width:100px" value="" placeholder="ราคา"/> <input type="text" name="stock[]" style="width:100px" value="" placeholder="จำนวน"/><a href="javascript:void(0);" class="remove_button"> ลบ</a></div>'; //เพิ่มอินพุตใน html
+  var fieldHTML = '<div style="margin-top:10px;"><input type="text" name="size[]" style="width:100px" value="" placeholder="ไซส์"/> <input type="text" name="sku[]" style="width:100px" value="" placeholder="โค้ดย่อย"/> <input type="text" name="price[]" style="width:100px" value="" placeholder="ราคา"/> <input type="text" name="stock[]" style="width:100px" value="" placeholder="จำนวน"/> <a href="javascript:void(0);"class="remove_button btn btn-danger btn-sm">ลบ</a></div>'; //เพิ่มอินพุตใน html
 
   var x = 1; //ตัวนับ
   //เช็คการคลิกเพิ่ม

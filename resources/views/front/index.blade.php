@@ -27,7 +27,7 @@
                                             <div class="caption">
                                                 <h5>{{ $item['product_name'] }}</h5>
                                                 <h4><a class="btn" href="{{url('product/' .$item['id'])}}">เพิ่มเติม</a> <span
-                                                        class="pull-right">ราคา {{ $item['product_price'] }} บ.</span></h4>
+                                                        class="pull-right">ร{{ $item['product_price'] }}บ.</span></h4>
                                             </div>
                                     </div>
                                 </li>

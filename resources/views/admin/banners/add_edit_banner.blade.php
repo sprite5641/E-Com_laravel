@@ -60,32 +60,43 @@
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="image">รูปแบนเนอร์</label>
-                                        <div class="input-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" name="image" id="image">
-                                                <label class="custom-file-label" for="image">เลือกไฟล์</label>
-                                            </div>
-                                            <div class="input-group-append">
-                                                <span class="input-group-text" id="">อัพโหลด</span>
-                                            </div>
+                                <div class="col-md-12 d-flex justify-content-center">
+                                    <div class="col-md-2">
+                                        <div class="form-group text-center">
+                                            <label for="image">รูปภาพสินค้า</label>
+                                            @if (!empty($banner['image']))
+                                                <img style="width:100%;"
+                                                    src="{{  asset('images/banner_images/' . $banner['image']) }}"
+                                                    id="output" class="img-fluid rounded ">
+                                                <span title="Delete Banner Image" href="javascript:void(0)"
+                                                    class="confirmDelete btn btn-danger mt-2 "
+                                                    record="banner"
+                                                    recordid="{{ $banner['id'] }}">ลบรูป</span>
+                                            @else
+                                                <img style="width:75%;" src="{{ asset('images/product_images/small/no-image.png') }}"
+                                                    id="output" class="img-fluid rounded ">
+                                            @endif
+                                            <span class="btn btn-primary btn-file mt-2">
+                                                เลือกไฟล์ <input type="file" name="image" id="image"
+                                                    onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+                                            </span>
                                         </div>
-                                        (แนะนำเลือกรูปภาพขนาด:&nbsp;&nbsp;กว้าง:&nbsp;1170&nbsp;พิกเซล,&nbsp;&nbsp;สูง:&nbsp;480&nbsp;พิกเซล)
-                                        @if (!empty($banner['image']))
-                                            <div><img style="width:150px; margin-top:5px;"
-                                                    src="{{ asset('images/banner_images/' . $banner['image']) }}">
-                                                &nbsp;
-                                            </div>
-                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="link">ลิ้ง</label>
+                                        <label for="title">หัวข้อแบนเนอร์</label>
+                                        <input type="text" class="form-control" name="title" id="title"
+                                            placeholder="ป้อนหัวข้อ" @if (!empty($banner['title']))
+                                    value="{{ $banner['title'] }}" @else
+                                        value="{{ old('title') }}" @endif>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="link">ลิงค์</label>
                                         <input type="text" class="form-control" name="link" id="link"
-                                            placeholder="ป้อนจำนวนสินค้า" @if (!empty($banner['link']))
+                                            placeholder="ป้อนลิงค์" @if (!empty($banner['link']))
                                     value="{{ $banner['link'] }}" @else
                                         value="{{ old('link') }}" @endif>
                                     </div>
@@ -93,22 +104,12 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-12 col-sm-6">
-
-                                    <div class="form-group">
-                                        <label for="title">หัวข้อแบนเนอร์</label>
-                                        <input type="text" class="form-control" name="title" id="title"
-                                            placeholder="ป้อนจำนวนสินค้า" @if (!empty($banner['title']))
-                                    value="{{ $banner['title'] }}" @else
-                                        value="{{ old('title') }}" @endif>
-                                    </div>
-                                    
-                                </div>
+                               
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="alt">ข้อความอื่น</label>
+                                        <label for="alt">ข้อความ</label>
                                         <input type="text" class="form-control" name="alt" id="alt"
-                                            placeholder="ป้อนจำนวนสินค้า" @if (!empty($banner['alt']))
+                                            placeholder="ป้อนข้อความ" @if (!empty($banner['alt']))
                                     value="{{ $banner['alt'] }}" @else
                                         value="{{ old('alt') }}" @endif>
                                     </div>

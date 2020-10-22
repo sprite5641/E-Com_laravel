@@ -284,8 +284,6 @@ class ProductsController extends Controller
         return redirect()->back();
     }
 
-    
-
     public function addAttributes(Request $request, $id)
     {
 

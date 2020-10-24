@@ -21,7 +21,7 @@
                 @endif
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ ucwords(Auth::guard('admin')->user()->name) }}</a>
+                <a href="{{ url('/admin/dashboard') }}" class="d-block">{{ ucwords(Auth::guard('admin')->user()->name) }}</a>
             </div>
         </div>
 

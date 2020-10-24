@@ -15,7 +15,7 @@
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/admin_css/adminlte.min.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
     {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
@@ -28,9 +28,8 @@
         </div>
         <!-- /.login-logo -->
         <div class="card">
-            <div class="card-body login-card-body text-center">
+            <div class="card-body login-card-body">
                 <p class="login-box-msg">กรุณาลงชื่อเข้าใช้</p>
-
                 @if (Session::has('error_message'))
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         {{ Session::get('error_message') }}
@@ -39,7 +38,6 @@
                         </button>
                     </div>
                 @endif
-
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -49,11 +47,10 @@
                         </ul>
                     </div>
                 @endif
-                
                 <form action="{{ url('/admin') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input name="email" id="email" type="email" class="form-control" placeholder="อีเมลล์">
+                        <input name="email" id="email" type="email" class="form-control" placeholder="อีเมลล์" >
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -72,16 +69,6 @@
                     <div class="row">
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">ล็อกอิน</button>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    จดจำชื่อผู้ใช้
-                                </label>
-                            </div>
                         </div>
                     </div>
                 </form>

@@ -36,14 +36,14 @@ class AdminController extends Controller
             $customMessages = [
                 'email.required' => 'กรุณากรอกอีเมลล์',
                 'email.email' => 'กรอกอีเมลล์ผิด',
-                'password.required' => 'กรุณากรอกรหัสสผ่าน',
+                'password.required' => 'กรุณากรอกรหัสผ่าน',
             ];
             $this->validate($request, $rules, $customMessages);
 
              if (Auth::guard('admin')->attempt(['email' => $data['email'], 'password' => $data['password']])) {
                  return redirect('admin/dashboard');
              } else {
-                 Session::flash('error_message', 'อีเมลล์หรือรหัสผ่านผิด');
+                 Session::flash('error_message','อีเมลล์หรือรหัสผ่านผิด');
                  return redirect()->back();
              }
         }

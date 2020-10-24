@@ -61,11 +61,11 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 text-center">
                                         <div class="form-group text-center">
                                             <label for="image">รูปภาพสินค้า</label>
                                             @if (!empty($banner['image']))
-                                                <img style="width:100%;"
+                                                <img 
                                                     src="{{  asset('images/banner_images/' . $banner['image']) }}"
                                                     id="output" class="img-fluid rounded ">
                                                 <span title="Delete Banner Image" href="javascript:void(0)"

@@ -37,7 +37,7 @@
         <div class="tab-content filter_products">
             @include('front.products.ajax_product_listing')
         </div>
-        {{-- <a href="compare.html" class="btn btn-large pull-right">Compair Product</a> --}}
+         <a href="compare.html" class="btn btn-large pull-right">Compair Product</a> 
         <div class="pagination">
          @if (isset($_GET['sort']) && !empty($_GET['soft']))
          {!! $categoryProducts->appends(['sort' => $_GET['sort']])->links() !!}          

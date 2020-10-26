@@ -60,7 +60,7 @@ Route::prefix('/admin')->namespace('Admin')->group(function () {
         Route::get('delete-product/{id}', 'ProductsController@deleteProduct');
         Route::match(['get', 'post'], 'add-edit-product/{id?}', 'ProductsController@addEditProduct');
         Route::get('delete-product-image/{id}', 'ProductsController@deteleProductImage');
-        // Route::get('delete-product-video/{id}', 'ProductsController@deteleProductVideo');
+
 
         //attribues
         Route::match(['get', 'post'], 'add-attributes/{id}', 'ProductsController@addAttributes');
@@ -92,9 +92,15 @@ Route::namespace('Front')->group(function () {
         echo "test";
         die;
     });
+    // product detail
     Route::get('/product/{id}', 'ProductsController@detail');
 
+    // get product attrbute price
     Route::post('/get-product-price', 'ProductsController@getProductPrice');
 
+    // add to cart
     Route::post('/add-to-cart','ProductsController@addtocart');
+
+    // shopping cart
+    Route::get('/cart','ProductsController@cart');
 });

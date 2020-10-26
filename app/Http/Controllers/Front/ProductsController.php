@@ -11,6 +11,7 @@ use App\Category;
 use App\Product;
 use App\ProductsAttribute;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
@@ -112,58 +113,69 @@ class ProductsController extends Controller
         }
     }
 
-    public function detail($id){
-        $productDetails = Product::with(['category','brand','attributes'=>function($query){
-            $query->where('status',1);
-        },'images'=>function($query){
-            $query->where('status',1);
+    public function detail($id)
+    {
+        $productDetails = Product::with(['category', 'brand', 'attributes' => function ($query) {
+            $query->where('status', 1);
+        }, 'images' => function ($query) {
+            $query->where('status', 1);
         }])->find($id)->toArray();
         // dd($productDetails);die;
-        $total_stock = ProductsAttribute::where('product_id',$id)->where('status',1)->sum('stock');
-        $relatedProducts = Product::where('category_id',$productDetails['category']['id'])
-        ->where('id','!=',$id)->limit(3)->inRandomOrder()->get()->toArray();
+        $total_stock = ProductsAttribute::where('product_id', $id)->where('status', 1)->sum('stock');
+        $relatedProducts = Product::where('category_id', $productDetails['category']['id'])
+            ->where('id', '!=', $id)->limit(3)->inRandomOrder()->get()->toArray();
         // dd($relatedProducts);die;
-        return view('front.products.detail')->with(compact('productDetails','total_stock','relatedProducts'));
+        return view('front.products.detail')->with(compact('productDetails', 'total_stock', 'relatedProducts'));
     }
 
-    public function getProductPrice(Request $request){
-        if($request->ajax()){
+    public function getProductPrice(Request $request)
+    {
+        if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data);die;
-            $getProductPrice = ProductsAttribute::where(['product_id'=>$data['product_id'],'size'
-            =>$data['size']])->where('status',1)->first();
+            $getProductPrice = ProductsAttribute::where(['product_id' => $data['product_id'], 'size'
+            => $data['size']])->where('status', 1)->first();
             return $getProductPrice->price;
         }
     }
 
-    public function addtocart(Request $request){
-        if($request->isMethod('post')){
+    public function addtocart(Request $request)
+    {
+        if ($request->isMethod('post')) {
             $data = $request->all();
-           // echo "<pre>"; print_r($data);die;
+            // echo "<pre>"; print_r($data);die;
 
             //เช็คสินค้าในสต็อกว่าพอต่อการสั่งซื้อหรือไม่
-            $getProductStock = ProductsAttribute::where(['product_id'=>$data['product_id'],
-            'size'=>$data['size']])->first()->toArray();
-            
-            if($getProductStock['stock']<$data['quantity']){
+            $getProductStock = ProductsAttribute::where([
+                'product_id' => $data['product_id'],
+                'size' => $data['size']
+            ])->first()->toArray();
+
+            if ($getProductStock['stock'] < $data['quantity']) {
                 $message = "สินค้ามีไม่เพียงพอ!";
-                session::flash('error_message',$message);
+                session::flash('error_message', $message);
                 return redirect()->back();
             }
 
             //สร้างsession id ถ้าไม่มี
             $session_id = Session::get('session_id');
-            if(empty($session_id)){
+            if (empty($session_id)) {
                 $session_id = Session::getId();
-                Session::put('session_id',$session_id);
+                Session::put('session_id', $session_id);
             }
 
             //เช็คสินค้าซ้ำ
-            $countProducts = Cart::where(['product_id'=>$data['product_id'],'size'=>$data['size'
-            ]])->count();
-            if($countProducts>0){
+            if (Auth::check()) {
+                $countProducts = Cart::where(['product_id' => $data['product_id'], 'size' => $data['size'], 'user_id' => Auth::user()->id])->count();
+            } else {
+                $countProducts = Cart::where(['product_id' => $data['product_id'], 'size' => $data['size'], 'session_id' => Session::get('session_id')])->count();
+            }
+
+            $countProducts = Cart::where(['product_id' => $data['product_id'], 'size' => $data['size']])->count();
+
+            if ($countProducts > 0) {
                 $message = "มีสินค้าอยู่ในตะกร้าแล้ว!";
-                session::flash('error_message',$message);
+                session::flash('error_message', $message);
                 return redirect()->back();
             }
 
@@ -179,8 +191,12 @@ class ProductsController extends Controller
             $cart->save();
 
             $message = "เพิ่มสินค้าในตระกร้าเรียบร้อย!";
-            session::flash('success_massage',$message);
+            session::flash('success_massage', $message);
             return redirect()->back();
         }
+    }
+
+    public function cart(){
+        return view('front.products.cart');
     }
 }

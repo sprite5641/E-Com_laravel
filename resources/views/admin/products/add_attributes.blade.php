@@ -77,6 +77,10 @@
                                         <label for="product_color">สี:</label>&nbsp;
                                         {{ $productdata['product_color'] }}
                                     </div>
+                                    <div class="form-group">
+                                        <label for="product_color">ราคา:</label>&nbsp;
+                                        {{ $productdata['product_price'] }}
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">

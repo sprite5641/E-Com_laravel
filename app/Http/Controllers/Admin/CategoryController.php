@@ -56,13 +56,14 @@ class CategoryController extends Controller
             $rules = [
                 'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
                 'section_id' => 'required',
-                'category_image' => 'image',
+                'category_image' => 'required|image',
                 'url' => 'required',
             ];
             $customMessages = [
                 'category_name.required' => 'กรุณากรอกชื่อประเภทสินค้า',
                 'category_name.regex' => 'กรุณากรอกชื่อประเภทสินค้าเป็นตัวอักษร',
                 'section_id.required' => 'กรุณาเลือกเพศของประเภทสินค้า',
+                'category_image.required' => 'กรุณาเพิ่มรูป',
                 'category_image.image' => 'คุณใส่รูปผิดประเภท',
                 'url.required' => 'กรุณากรอกURLของสินค้า',
             ];
@@ -88,6 +89,7 @@ class CategoryController extends Controller
             if(empty($data['url'])){
                 $data['url']="";
             }
+           
 
             
           //   echo "<pre>"; print_r($data); die;

@@ -13,7 +13,6 @@ class Section extends Model
         return $getSections;
     }
 
-
     public function categories(){
         return $this->hasMany('App\Category','section_id')->where(['parent_id'=>'ROOT','status'=>1
         ])->with('subcategories');

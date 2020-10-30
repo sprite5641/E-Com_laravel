@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\File;
 
 class ProductsController extends Controller
 {
-    public function products()
-    {
+    public function products(){
         Session::put('page', 'products');
         $products = Product::with(['category' => function ($query) {
             $query->select('id', 'category_name');
@@ -29,8 +28,7 @@ class ProductsController extends Controller
         return view('admin.products.products')->with(compact('products'));
     }
 
-    public function updateProductStatus(Request $request)
-    {
+    public function updateProductStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
@@ -44,8 +42,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function deleteProduct($id)
-    {
+    public function deleteProduct($id){
         $productImage = Product::select('main_image')->where('id', $id)->first();
       
         Product::where('id', $id)->delete();
@@ -67,8 +64,7 @@ class ProductsController extends Controller
         return redirect()->back();
     }
 
-    public function addEditProduct(Request $request, $id = null)
-    {
+    public function addEditProduct(Request $request, $id = null){
         if ($id == "") {
             $title = "เพิ่มสินค้า";
             $product = new Product;
@@ -261,8 +257,7 @@ class ProductsController extends Controller
         ));
     }
 
-    public function deteleProductImage($id)
-    {
+    public function deteleProductImage($id){
         $productImage = Product::select('main_image')->where('id', $id)->first();
         $small_image_path = 'images/product_images/small/';
         $medium_image_path = 'images/product_images/medium/';
@@ -284,8 +279,7 @@ class ProductsController extends Controller
         return redirect()->back();
     }
 
-    public function addAttributes(Request $request, $id)
-    {
+    public function addAttributes(Request $request, $id){
 
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -335,8 +329,7 @@ class ProductsController extends Controller
         return view('admin.products.add_attributes')->with(compact('productdata', 'title'));
     }
 
-    public function editAttributes(Request $request, $id)
-    {
+    public function editAttributes(Request $request, $id){
         if ($request->isMethod('post')) {
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
@@ -353,8 +346,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function updateAttributeStatus(Request $request)
-    {
+    public function updateAttributeStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
@@ -368,8 +360,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function deleteAttribute($id)
-    {
+    public function deleteAttribute($id){
         ProductsAttribute::where('id', $id)->delete();
 
         $message = 'ลบรายละเอียดสินค้าเรียบร้อย!';
@@ -378,8 +369,7 @@ class ProductsController extends Controller
         return redirect()->back();
     }
 
-    public function addImages(Request $request, $id)
-    {
+    public function addImages(Request $request, $id){
         if($request->isMethod('post')){
             if ($request->hasFile('images')) {
                 $images = $request->file('images');
@@ -419,8 +409,7 @@ class ProductsController extends Controller
 
     }
 
-    public function updateImageStatus(Request $request)
-    {
+    public function updateImageStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
@@ -434,8 +423,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function deleteImage($id)
-    {
+    public function deleteImage($id){
         $productImage = ProductsImage::select('image')->where('id', $id)->first();
         $small_image_path = 'images/product_images/small/';
         $medium_image_path = 'images/product_images/medium/';

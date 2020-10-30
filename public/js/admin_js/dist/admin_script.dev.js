@@ -220,7 +220,7 @@ $(document).ready(function () {
       cancelButtonText: 'ยกเลิก'
     }).then(function (result) {
       if (result.isConfirmed) {
-        Swal.fire('ลบ!', 'คุณลบสินค้าเรียบร้อย.', 'success');
+        Swal.fire('ลบรายการสำเร็จ!', 'คุณลบรายการเรียบร้อย.', 'success');
         window.location.href = "/admin/delete-" + record + "/" + recordid;
       }
     });

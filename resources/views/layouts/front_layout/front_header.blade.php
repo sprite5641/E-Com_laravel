@@ -1,7 +1,9 @@
 <?php
 
 use App\Section;
+use App\Cart;
 $sections = Section::sections();
+$carts = Cart::userCartItems();
 
 // echo "<pre>"; print_r($sections);die;
 ?>
@@ -11,7 +13,7 @@ $sections = Section::sections();
    <div class="span6">ยินดีต้อนรับ!<strong> ผู้ใช้</strong></div>
    <div class="span6">
     <div class="pull-right">
-     <a href="product_summary.html"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> มี [3] สินค้าในตระกร้า </span> </a>
+     <a href="{{ url('/cart')}}"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> มี {{count($carts)}} สินค้าในตระกร้า </span> </a>
     </div>
    </div>
   </div>

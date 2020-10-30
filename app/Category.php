@@ -10,6 +10,7 @@ class Category extends Model
     {
         return $this->hasMany('App\Category', 'parent_id')->where('status', 1);
     }
+
     public function section()
     {
         return $this->belongsTo('App\Section', 'section_id')->select('id', 'name');
@@ -19,6 +20,7 @@ class Category extends Model
     {
         return $this->belongsTo('App\Category', 'parent_id')->select('id', 'category_name');
     }
+    
     public static function catDetails($url)
     {
         $catDetails = Category::select('id', 'parent_id', 'category_name', 'url', 'description')->with(['subcategories' =>

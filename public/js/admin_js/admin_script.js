@@ -207,8 +207,8 @@ $(document).ready(function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 Swal.fire(
-                    'ลบ!',
-                    'คุณลบสินค้าเรียบร้อย.',
+                    'ลบรายการสำเร็จ!',
+                    'คุณลบรายการเรียบร้อย.',
                     'success'
                 )
                 window.location.href = "/admin/delete-" + record + "/" + recordid;

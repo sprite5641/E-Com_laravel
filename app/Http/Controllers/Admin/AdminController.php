@@ -12,19 +12,18 @@ use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\File;
 class AdminController extends Controller
 {
-    public function dashboard()
-    {
+    public function dashboard(){
         Session::put('page', 'dashboard');
         return view('admin.admin_dashboard');
     }
-    public function settings()
-    {
+
+    public function settings(){
         Session::put('page', 'settings');
         $adminDetails = Admin::where('email', Auth::guard('admin')->user()->email)->first();
         return view('admin.admin_settings')->with(compact('adminDetails'));
     }
-    public function login(Request $request)
-    {
+
+    public function login(Request $request){
 
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -49,13 +48,13 @@ class AdminController extends Controller
         }
         return view('admin.admin_login');
     }
-    public function logout()
-    {
+
+    public function logout(){
         Auth::logout();
         return redirect('/admin');
     }
-    public function chkCurrentPassword(Request $request)
-    {
+    
+    public function chkCurrentPassword(Request $request){
         $data = $request->all();
         // echo"<pre>"; print_r($data); die;
         if (Hash::check($data['current_pwd'], Auth::guard('admin')->user()->password)) {
@@ -65,8 +64,7 @@ class AdminController extends Controller
         }
     }
 
-    public function updateCurrentPassword(Request $request)
-    {
+    public function updateCurrentPassword(Request $request){
         if ($request->isMethod('post')) {
             $data = $request->all();
             //  echo "<pre>"; print_r($data); die;
@@ -84,8 +82,7 @@ class AdminController extends Controller
         }
     }
 
-    public function updateAdminDetails(Request $request)
-    {
+    public function updateAdminDetails(Request $request){
         Session::put('page', 'update-admin-details');
         if ($request->isMethod('post')) {
             $data = $request->all();
@@ -129,8 +126,7 @@ class AdminController extends Controller
         return view('admin.update_admin_details');
     }
 
-    public function deleteAdminImage($id)
-    {
+    public function deleteAdminImage($id){
         $adminImage = Admin::select('image')->where('id', Auth::guard('admin')->user()->id)->first();
         $admin_image_path = 'images/admin_images/admin_photos/';
 

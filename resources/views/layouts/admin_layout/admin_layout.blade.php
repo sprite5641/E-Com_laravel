@@ -15,7 +15,8 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <!-- Tempusdominus Bbootstrap 4 -->
-    <link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
@@ -25,7 +26,7 @@
     <link rel="stylesheet" href="{{ asset('plugins/jqvmap/jqvmap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/admin_css/adminlte.min.css') }}">
-    
+
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
     <!-- Daterange picker -->
@@ -34,7 +35,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.css') }}">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
-    {{-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> --}}
+    {{--
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    --}}
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -71,12 +74,7 @@
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
-        $('.select2').select2()
-
-        //Initialize Select2 Elements
-        $('.select2bs4').select2({
-            theme: 'bootstrap4'
-        })
+       
 
     </script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -86,23 +84,114 @@
             $("#sections").DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                language: {
+                    search: '<span>ค้นหา : </span> _INPUT_',
+                    searchPlaceholder: 'พิมพ์เพื่อค้นหา...',
+                    info: 'แสดงข้อมูล _START_ ถึง _END_ จาก _TOTAL_ รายการ',
+                    infoEmpty: 'แสดงข้อมูล 0 ถึง 0 จาก 0 รายการ',
+                    infoFiltered: '(คัดกรองจาก _MAX_ รายการ)',
+                    lengthMenu: '<span>แสดง :</span> _MENU_',
+                    loadingRecords: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังเรียกข้อมูล....</div>',
+                    processing: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังประมวลผล....</div>',
+                    zeroRecords: 'ไม่พบข้อมูล',
+                    emptyTable: 'ไม่พบข้อมูล',
+                    paginate:{
+                        'first':'หน้าแรก',
+                        'last':'หน้าสุดท้าย',
+                        'next': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-left"></i>' : '<i class="fas fa-angle-right"></i>',
+                        'previous': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-right"></i>' : '<i class="fas fa-angle-left"></i>'
+                    }   
+                }
             });
             $("#categories").DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                language: {
+                    search: '<span>ค้นหา : </span> _INPUT_',
+                    searchPlaceholder: 'พิมพ์เพื่อค้นหา...',
+                    info: 'แสดงข้อมูล _START_ ถึง _END_ จาก _TOTAL_ รายการ',
+                    infoEmpty: 'แสดงข้อมูล 0 ถึง 0 จาก 0 รายการ',
+                    infoFiltered: '(คัดกรองจาก _MAX_ รายการ)',
+                    lengthMenu: '<span>แสดง :</span> _MENU_',
+                    loadingRecords: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังเรียกข้อมูล....</div>',
+                    processing: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังประมวลผล....</div>',
+                    zeroRecords: 'ไม่พบข้อมูล',
+                    emptyTable: 'ไม่พบข้อมูล',
+                    paginate:{
+                        'first':'หน้าแรก',
+                        'last':'หน้าสุดท้าย',
+                        'next': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-left"></i>' : '<i class="fas fa-angle-right"></i>',
+                        'previous': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-right"></i>' : '<i class="fas fa-angle-left"></i>'
+                    }   
+                }
             });
             $("#products").DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                language: {
+                    search: '<span>ค้นหา : </span> _INPUT_',
+                    searchPlaceholder: 'พิมพ์เพื่อค้นหา...',
+                    info: 'แสดงข้อมูล _START_ ถึง _END_ จาก _TOTAL_ รายการ',
+                    infoEmpty: 'แสดงข้อมูล 0 ถึง 0 จาก 0 รายการ',
+                    infoFiltered: '(คัดกรองจาก _MAX_ รายการ)',
+                    lengthMenu: '<span>แสดง :</span> _MENU_',
+                    loadingRecords: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังเรียกข้อมูล....</div>',
+                    processing: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังประมวลผล....</div>',
+                    zeroRecords: 'ไม่พบข้อมูล',
+                    emptyTable: 'ไม่พบข้อมูล',
+                    paginate:{
+                        'first':'หน้าแรก',
+                        'last':'หน้าสุดท้าย',
+                        'next': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-left"></i>' : '<i class="fas fa-angle-right"></i>',
+                        'previous': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-right"></i>' : '<i class="fas fa-angle-left"></i>'
+                    }   
+                }
             });
             $("#brands").DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                language: {
+                    search: '<span>ค้นหา : </span> _INPUT_',
+                    searchPlaceholder: 'พิมพ์เพื่อค้นหา...',
+                    info: 'แสดงข้อมูล _START_ ถึง _END_ จาก _TOTAL_ รายการ',
+                    infoEmpty: 'แสดงข้อมูล 0 ถึง 0 จาก 0 รายการ',
+                    infoFiltered: '(คัดกรองจาก _MAX_ รายการ)',
+                    lengthMenu: '<span>แสดง :</span> _MENU_',
+                    loadingRecords: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังเรียกข้อมูล....</div>',
+                    processing: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังประมวลผล....</div>',
+                    zeroRecords: 'ไม่พบข้อมูล',
+                    emptyTable: 'ไม่พบข้อมูล',
+                    paginate:{
+                        'first':'หน้าแรก',
+                        'last':'หน้าสุดท้าย',
+                        'next': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-left"></i>' : '<i class="fas fa-angle-right"></i>',
+                        'previous': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-right"></i>' : '<i class="fas fa-angle-left"></i>'
+                    }   
+                }
             });
             $("#banners").DataTable({
                 "responsive": true,
                 "autoWidth": false,
+                language: {
+                    search: '<span>ค้นหา : </span> _INPUT_',
+                    searchPlaceholder: 'พิมพ์เพื่อค้นหา...',
+                    info: 'แสดงข้อมูล _START_ ถึง _END_ จาก _TOTAL_ รายการ',
+                    infoEmpty: 'แสดงข้อมูล 0 ถึง 0 จาก 0 รายการ',
+                    infoFiltered: '(คัดกรองจาก _MAX_ รายการ)',
+                    lengthMenu: '<span>แสดง :</span> _MENU_',
+                    loadingRecords: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังเรียกข้อมูล....</div>',
+                    processing: '<div class="text-warning"><i class="icon-spinner9 spinner"></i> กำลังประมวลผล....</div>',
+                    zeroRecords: 'ไม่พบข้อมูล',
+                    emptyTable: 'ไม่พบข้อมูล',
+                    paginate:{
+                        'first':'หน้าแรก',
+                        'last':'หน้าสุดท้าย',
+                        'next': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-left"></i>' : '<i class="fas fa-angle-right"></i>',
+                        'previous': $('html').attr('dir')=='rtl' ? '<i class="fas fa-angle-right"></i>' : '<i class="fas fa-angle-left"></i>'
+                    }   
+                }
             });
+
         });
 
     </script>

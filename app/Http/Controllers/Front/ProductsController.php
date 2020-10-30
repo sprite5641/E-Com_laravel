@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
-    public function listing(Request $request)
-    {
+    public function listing(Request $request){
         Paginator::useBootstrap();
         if ($request->ajax()) {
 
@@ -113,8 +112,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function detail($id)
-    {
+    public function detail($id){
         $productDetails = Product::with(['category', 'brand', 'attributes' => function ($query) {
             $query->where('status', 1);
         }, 'images' => function ($query) {
@@ -128,8 +126,7 @@ class ProductsController extends Controller
         return view('front.products.detail')->with(compact('productDetails', 'total_stock', 'relatedProducts'));
     }
 
-    public function getProductPrice(Request $request)
-    {
+    public function getProductPrice(Request $request){
         if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data);die;
@@ -139,8 +136,7 @@ class ProductsController extends Controller
         }
     }
 
-    public function addtocart(Request $request)
-    {
+    public function addtocart(Request $request){
         if ($request->isMethod('post')) {
             $data = $request->all();
             // echo "<pre>"; print_r($data);die;
@@ -197,6 +193,8 @@ class ProductsController extends Controller
     }
 
     public function cart(){
-        return view('front.products.cart');
+        $userCartItems = Cart::userCartItems();
+       // echo "<pre>"; print_r($userCartItems);die;
+        return view('front.products.cart')->with(compact('userCartItems'));
     }
 }

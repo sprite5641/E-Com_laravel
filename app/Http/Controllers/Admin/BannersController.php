@@ -16,6 +16,7 @@ class BannersController extends Controller
         //dd($banners);die;
         return view('admin.banners.banners')->with(compact('banners'));
     }
+    
     public function addEditBanner($id=null,Request $request){
         if($id == ""){
             $banner = new Banner;
@@ -75,8 +76,7 @@ class BannersController extends Controller
         return view('admin.banners.add_edit_banner')->with(compact('title','banner'));
     }
 
-    public function updateBannerStatus(Request $request)
-    {
+    public function updateBannerStatus(Request $request){
         if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data); die;
@@ -90,8 +90,7 @@ class BannersController extends Controller
         }
     }
 
-    public function deleteBanner($id)
-    {
+    public function deleteBanner($id){
         $bannerImage = Banner::where('id', $id)->first();
         
         $banner_image_path = 'images/banner_images/';

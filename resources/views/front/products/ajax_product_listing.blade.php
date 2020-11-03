@@ -1,3 +1,4 @@
+<?php use App\Product; ?>
 <div class="tab-pane  active" id="blockView">
     <ul class="thumbnails">
         @foreach ($categoryProducts as $product)
@@ -24,11 +25,20 @@
                         <p>
                             {{ $product['brand']['name'] }}
                         </p>
-                        <h4 style="text-align:center"><a class="btn" href="{{ url('product/' . $product['id']) }}"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">เพิ่มสินค้า <i
-                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                href="#">ราคา{{ $product['product_price'] }}</a></h4>
-
+                        <?php $discounted_price = Product::getDiscountedPrice($product['id']); ?>
+                        <h4 style="text-align:center"><a class="btn" href="{{ url('product/' . $product['id']) }}"> 
+                                <i class="icon-zoom-in"></i></a> <a class="btn" href="#">เพิ่มสินค้า 
+                                <i class="icon-shopping-cart"></i></a> 
+                                <a class="btn btn-primary" href="#">
+                                @if($discounted_price>0)
+                                <del>ราคา{{ $product['product_price'] }}</del>
+                                @else
+                                ราคา{{ $product['product_price'] }}
+                                @endif
+                            </a></h4>
+                            @if($discounted_price>0)
+                        <h4><font color="red">ส่วนลดสินค้า: {{$discounted_price}}</font></h4>
+                            @endif
                     </div>
                 </div>
             </li>

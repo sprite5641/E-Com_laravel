@@ -160,9 +160,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="product_weight">น้ำหนักสินค้า</label>
+                                        <label for="product_weight">ส่วนลดสินค้า (%)</label>
                                         <input type="text" class="form-control" name="product_weight" id="product_weight"
-                                            placeholder="ป้อนน้ำหนักสินค้า" @if (!empty($productdata['product_weight']))
+                                            placeholder="ป้อนส่วนลดสินค้า" @if (!empty($productdata['product_weight']))
                                     value="{{ $productdata['product_weight'] }}" @else
                                         value="{{ old('product_weight') }}" @endif>
                                     </div>

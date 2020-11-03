@@ -1,3 +1,4 @@
+<?php use App\Product; ?>
 @extends('layouts.front_layout.front_layout')
 @section('content')
     <div class="span9">
@@ -59,7 +60,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                @endif
+                @endif 
                 <h3>{{ $productDetails['product_name'] }}</h3>
                 <small>{{ $productDetails['brand']['name'] }}</small>
                 <hr class="soft" />
@@ -68,7 +69,15 @@
                     @csrf
                     <input type="hidden" name="product_id" value="{{ $productDetails['id'] }}">
                     <div class="control-group">
-                        <h4 class="getAttrPrice">ราคา <small style="color: red;">โปรดเลือกขนาด</small></h4>
+                       <?php $discounted_price = Product::getDiscountedPrice($productDetails['id']); ?>
+                        <h4 class="getAttrPrice">
+                           @if ($discounted_price>0)
+                           ราคา <del>{{$productDetails['product_price']}}</del> บาท เหลือ {{$discounted_price}} บาท
+                           @else
+                            ราคา <small style="color: red;">โปรดเลือกขนาด</small>
+                           @endif
+
+                        </h4>
                         <select name="size" id="getPrice" product-id="{{ $productDetails['id'] }}" class="span2 pull-left"
                             required="">
                             <option disabled selected value>เลือกไซต์</option>

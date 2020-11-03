@@ -115,8 +115,7 @@ $(document).ready(function() {
         })
         return filter;
     }
-
-    $("#getPrice").change(function() {
+    $(document).on("change", "#getPrice", function() {
         var size = $(this).val();
         // if (size == "") {
         //     alert("Please select Size");
@@ -128,8 +127,12 @@ $(document).ready(function() {
             data: { size: size, product_id: product_id },
             type: 'post',
             success: function(resp) {
-                // alert(resp);
-                $(".getAttrPrice").html("ราคา " + resp + " บาท");
+                if (resp['discounted_price'] > 0) {
+                    $(".getAttrPrice").html("<del>ราคา " + resp['product_price'] + "</del> บาท เหลือ " + resp['discounted_price'] + " บาท");
+                } else {
+                    $(".getAttrPrice").html("ราคา " + resp['product_price']);
+                }
+
             },
             error: function() {
                 alert("Error");

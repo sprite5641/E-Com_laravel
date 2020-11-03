@@ -11,32 +11,33 @@
         <hr class="soft" />
         <table class="table table-bordered">
             <tr>
-                <th> I AM ALREADY REGISTERED </th>
+                <th> 
+                    ฉันลงทะเบียนแล้ว </th>
             </tr>
             <tr>
                 <td>
                     <form class="form-horizontal">
                         <div class="control-group">
-                            <label class="control-label" for="inputUsername">Username</label>
+                            <label class="control-label" for="inputUsername">ชื่อผู้ใช้</label>
                             <div class="controls">
                                 <input type="text" id="inputUsername" placeholder="Username">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPassword1">Password</label>
+                            <label class="control-label" for="inputPassword1">รหัสผ่าน</label>
                             <div class="controls">
                                 <input type="password" id="inputPassword1" placeholder="Password">
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <button type="submit" class="btn">Sign in</button> OR <a href="register.html"
-                                    class="btn">Register Now!</a>
+                                <button type="submit" class="btn">ล็อกอิน</button> หรือ <a href="register.html"
+                                    class="btn">สมัครสมาชิก!</a>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <a href="forgetpass.html" style="text-decoration:underline">Forgot password ?</a>
+                                <a href="forgetpass.html" style="text-decoration:underline">ฉันลืมรหัสผ่าน ?</a>
                             </div>
                         </div>
                     </form>
@@ -47,12 +48,12 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>Product</th>
-                    <th colspan="2">Description</th>
-                    <th>Quantity/Update</th>
-                    <th>Price</th>
-                    <th>Discount</th>
-                    <th>Total</th>
+                    <th>สินค้า</th>
+                    <th colspan="2">รายละเอียด</th>
+                    <th>จำนวน/เพิ่มลบ</th>
+                    <th>ราคา</th>
+                    <th>ส่วนลด</th>
+                    <th>ราคารวม</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,8 +67,8 @@
                         <td colspan="2">
                             {{ $item['product']['product_name'] }}
                             ({{ $item['product']['product_code'] }})<br />
-                            Color : {{ $item['product']['product_color'] }}<br />
-                            Size : {{ $item['size'] }}
+                            สี : {{ $item['product']['product_color'] }}<br />
+                            ไซส์ : {{ $item['size'] }}
                         </td>
                         <td>
                             <div class="input-append">
@@ -84,25 +85,25 @@
                                 </button>
                             </div>
                         </td>
-                        <td>Rs.{{ $attrPrice }}</td>
-                        <td>{{ $item['quantity'] }}</td>
-                        <td>Rs.{{ $attrPrice * $item['quantity'] }}</td>
+                        <td>ราคา {{ $attrPrice }}</td>
+                        <td></td>
+                        <td>ราคา {{ $attrPrice * $item['quantity'] }}</td>
                     </tr>
                     <?php $total_price = $total_price + $attrPrice * $item['quantity']; ?>
                 @endforeach
 
 
                 <tr>
-                    <td colspan="6" style="text-align:right">Total Price: </td>
-                    <td> Rs.{{ $total_price }}</td>
+                    <td colspan="6" style="text-align:right">ราคารวม: </td>
+                    <td>{{ $total_price }} บาท</td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="text-align:right">Total Discount: </td>
-                    <td> Rs.0.00</td>
+                    <td colspan="6" style="text-align:right">ราคาหักส่วนลด: </td>
+                    <td> 0.00 บาท</td>
                 </tr>
                 <tr>
-                    <td colspan="6" style="text-align:right"><strong>TOTAL (Rs.{{ $total_price }} - Rs.0) =</strong></td>
-                    <td class="label label-important" style="display:block"> <strong> Rs.{{ $total_price }} </strong></td>
+                    <td colspan="6" style="text-align:right"><strong>รวม (ราคา {{ $total_price }} - ส่วนลด 0) =</strong></td>
+                    <td class="label label-important" style="display:block"> <strong> {{ $total_price }} บาท</strong></td>
                 </tr>
             </tbody>
         </table>
@@ -114,10 +115,10 @@
                     <td>
                         <form class="form-horizontal">
                             <div class="control-group">
-                                <label class="control-label"><strong> VOUCHERS CODE: </strong> </label>
+                                <label class="control-label"><strong> โค้ดส่วนลด: </strong> </label>
                                 <div class="controls">
                                     <input type="text" class="input-medium" placeholder="CODE">
-                                    <button type="submit" class="btn"> ADD </button>
+                                    <button type="submit" class="btn"> เพิ่ม </button>
                                 </div>
                             </div>
                         </form>
@@ -129,34 +130,34 @@
 
         <table class="table table-bordered">
             <tr>
-                <th>ESTIMATE YOUR SHIPPING </th>
+                <th>ประมาณการระยะเวลา </th>
             </tr>
             <tr>
                 <td>
                     <form class="form-horizontal">
                         <div class="control-group">
-                            <label class="control-label" for="inputCountry">Country </label>
+                            <label class="control-label" for="inputCountry">จังหวัด </label>
                             <div class="controls">
                                 <input type="text" id="inputCountry" placeholder="Country">
                             </div>
                         </div>
                         <div class="control-group">
-                            <label class="control-label" for="inputPost">Post Code/ Zipcode </label>
+                            <label class="control-label" for="inputPost">รหัสไปรษณีย์ </label>
                             <div class="controls">
                                 <input type="text" id="inputPost" placeholder="Postcode">
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="controls">
-                                <button type="submit" class="btn">ESTIMATE </button>
+                                <button type="submit" class="btn">ประมาณการ </button>
                             </div>
                         </div>
                     </form>
                 </td>
             </tr>
         </table>
-        <a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-        <a href="login.html" class="btn btn-large pull-right">Next <i class="icon-arrow-right"></i></a>
+        <a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> เลือกสินค้าต่อ </a>
+        <a href="login.html" class="btn btn-large pull-right">ไปต่อ <i class="icon-arrow-right"></i></a>
 
     </div>
 @endsection

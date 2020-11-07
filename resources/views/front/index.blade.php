@@ -1,3 +1,4 @@
+<?php use App\Product; ?>
 @extends('layouts.front_layout.front_layout')
 @section('content')
     <div class="span9">
@@ -26,8 +27,16 @@
                                             @endif
                                             <div class="caption">
                                                 <h5>{{ $item['product_name'] }}</h5>
+                                                <?php $discounted_price = Product::getDiscountedPrice($item['id']); ?>
                                                 <h4><a class="btn" href="{{url('product/' .$item['id'])}}">เพิ่มเติม</a> <span
-                                                        class="pull-right">ร{{ $item['product_price'] }}บ.</span></h4>
+                                                        class="pull-right" style="font-size: 12px;">
+                                                        @if($discounted_price>0)
+                                                        <del>ร{{ $item['product_price'] }}บ.</del>
+                                                        <font color="red">ส่วนลดสินค้า: {{$discounted_price}}</font>
+                                                        @else
+                                                        ร{{ $item['product_price'] }}บ.
+                                                        @endif
+                                                    </span></h4>
                                             </div>
                                     </div>
                                 </li>
@@ -37,10 +46,9 @@
                     @endforeach
                     @if ( $featuredItemsCount > 4)
                      <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
-                <a class="right carousel-control" href="#featured" data-slide="next">›</a> 
+                     <a class="right carousel-control" href="#featured" data-slide="next">›</a> 
                 @endif
                 </div>
-                
             </div>
         </div>
     </div>
@@ -64,9 +72,22 @@
                         <p>
                             {{ $product['product_code'] }} ({{ $product['product_color'] }})
                         </p>
-                        <h4 style="text-align:center"><a class="btn" href="{{ url('product/' . $product['id']) }}"> <i
-                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">ราคา {{ $product['product_price'] }} บ.</a></h4>
+                        <?php $discounted_price = Product::getDiscountedPrice($product['id']); ?>
+                        <h4 style="text-align:center">
+                            {{-- <a class="btn" href="{{ url('product/' . $product['id']) }}"> 
+                                <i class="icon-zoom-in"></i></a> --}}
+                            <a class="btn" href="#">Add to <i
+                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">
+                                       @if($discounted_price>0)
+                                        <del>ราคา {{ $product['product_price'] }} บ.</del>
+                                        
+                                        @else
+                                        ราคา {{ $product['product_price'] }} บ.
+                                        @endif
+                                    </a></h4>
+                                    @if($discounted_price>0)
+                                  <h4><font color="red">ส่วนลดสินค้า: {{$discounted_price}}</font></h4>
+                                    @endif
                     </div>
                 </div>
             </li>

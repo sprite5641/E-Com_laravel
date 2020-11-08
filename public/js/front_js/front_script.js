@@ -117,18 +117,18 @@ $(document).ready(function() {
     }
     $(document).on("change", "#getPrice", function() {
         var size = $(this).val();
-        // if (size == "") {
-        //     alert("Please select Size");
-        //     return false;
-        // }
+         if (size == "") {
+             alert("Please select Size");
+             return false;
+         }
         var product_id = $(this).attr("product-id");
         $.ajax({
             url: '/get-product-price',
             data: { size: size, product_id: product_id },
             type: 'post',
             success: function(resp) {
-                if (resp['discounted_price'] > 0) {
-                    $(".getAttrPrice").html("<del>ราคา " + resp['product_price'] + "</del> บาท เหลือ " + resp['discounted_price'] + " บาท");
+                if (resp['discount'] > 0) {
+                    $(".getAttrPrice").html("<del>ราคา " + resp['product_price'] + "</del> บาท เหลือ " + resp['final_price'] + " บาท");
                 } else {
                     $(".getAttrPrice").html("ราคา " + resp['product_price']);
                 }

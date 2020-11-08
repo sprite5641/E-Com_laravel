@@ -1,4 +1,4 @@
-<?php use App\Cart; ?>
+<?php use App\Product; ?>
 @extends('layouts.front_layout.front_layout')
 @section('content')
     <div class="span9">
@@ -44,14 +44,29 @@
                 </td>
             </tr>
         </table>
-
+        @if (Session::has('success_massage'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('success_massage') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+    @if (Session::has('error_message'))
+        <div class="alert alert-danger" role="alert">
+            {{ Session::get('error_message') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif 
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>สินค้า</th>
                     <th colspan="2">รายละเอียด</th>
                     <th>จำนวน/เพิ่มลบ</th>
-                    <th>ราคา</th>
+                    <th>ราคาต่อชิ้น</th>
                     <th>ส่วนลด</th>
                     <th>ราคารวม</th>
                 </tr>
@@ -59,7 +74,7 @@
             <tbody>
                 <?php $total_price = 0; ?>
                 @foreach ($userCartItems as $item)
-                    <?php $attrPrice = Cart::getProductAttrPrice($item['product_id'], $item['size']); ?>
+                    <?php $attrPrice = Product::getDiscountedAttrPrice($item['product_id'], $item['size']); ?>
                     <tr>
                         <td> <img width="60"
                                 src="{{ asset('images/product_images/small/' . $item['product']['main_image']) }}" alt="" />
@@ -85,11 +100,11 @@
                                 </button>
                             </div>
                         </td>
-                        <td>ราคา {{ $attrPrice }}</td>
-                        <td></td>
-                        <td>ราคา {{ $attrPrice * $item['quantity'] }}</td>
+                        <td>{{ $attrPrice['product_price'] }} บาท</td>
+                        <td>{{ $attrPrice['discount'] }} บาท</td>
+                        <td>{{ $attrPrice['final_price'] * $item['quantity'] }} บาท</td>
                     </tr>
-                    <?php $total_price = $total_price + $attrPrice * $item['quantity']; ?>
+                    <?php $total_price = $total_price + $attrPrice['final_price'] * $item['quantity']; ?>
                 @endforeach
 
 

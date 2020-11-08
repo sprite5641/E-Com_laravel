@@ -130,8 +130,8 @@ class ProductsController extends Controller
         if ($request->ajax()) {
             $data = $request->all();
             // echo "<pre>"; print_r($data);die;
-            $getDiscountesAttrPrice = Product::getDiscountesAttrPrice($data['product_id'],$data['size']);
-            return $getDiscountesAttrPrice;
+            $getDiscountedAttrPrice = Product::getDiscountedAttrPrice($data['product_id'],$data['size']);
+            return $getDiscountedAttrPrice;
         }
     }
 
@@ -187,7 +187,7 @@ class ProductsController extends Controller
 
             $message = "เพิ่มสินค้าในตระกร้าเรียบร้อย!";
             session::flash('success_massage', $message);
-            return redirect()->back();
+            return redirect('cart');
         }
     }
 
